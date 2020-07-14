@@ -1,0 +1,24 @@
+def solution(H) :
+  high = max(H)
+  leng = len(H)
+  Hrev = H[::-1]
+
+  early = H.index(high)
+  late = leng - Hrev.index(high) - 1
+
+  if early == 0 and late == (leng - 1):
+    return high * leng
+  elif early == 0 :
+    return high * (late + 1) + max(H[late + 1:]) * (leng - late - 1)
+  elif late == (leng - 1) :
+    return max(H[:early]) * early + high * (leng - early)
+  else :
+    first = high * (late + 1) + max(H[late:]) * (leng - late)
+    second = max(H[:early]) * early + high * (leng - early)
+    return min(first, second)
+  
+
+
+
+H = [1,1,7,6,6,6]
+print(solution(H))
